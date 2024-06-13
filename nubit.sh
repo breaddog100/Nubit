@@ -3,7 +3,7 @@
 # 节点部署
 function install_node() {
 	read -p "请输入节点名称:" node_name
-	screen -dmS $node_name bash -c "curl -sL1 https://nubit.sh | bash"
+	screen -dmS nubit_$node_name bash -c "curl -sL1 https://nubit.sh | bash"
 	echo "部署完成"
 }
 
@@ -17,7 +17,7 @@ function view_status(){
 # 节点日志
 function node_log(){
 	read -p "请输入节点名称:" node_name
-	screen -r $node_name
+	screen -r nubit_$node_name
 }
 
 # 钱包地址
@@ -70,6 +70,23 @@ function import_wallet(){
 	./nkey add $wallet_name --recover --keyring-backend test --node.type $network --p2p.network $node_type
 }
 
+# 卸载节点
+function uninstall_node(){
+    echo "你确定要卸载nubit节点程序吗？这将会删除所有相关的数据。[Y/N]"
+    read -r -p "请确认: " response
+    case "$response" in
+        [yY][eE][sS]|[yY]) 
+            echo "开始卸载节点程序..."
+            screen -ls | grep 'nubit_' | cut -d. -f1 | awk '{print $1}' | xargs -I {} screen -X -S {} quit
+			rm -rf .nubit-light-nubit-alphatestnet-1 .nubit-validator nubit-node
+            echo "节点程序卸载完成。"
+            ;;
+        *)
+            echo "取消卸载操作。"
+            ;;
+    esac
+}
+
 # 主菜单
 function main_menu() {
 	while true; do
@@ -87,6 +104,7 @@ function main_menu() {
 	    echo "7. 获取秘钥 wallet_keys"
 	    echo "8. 代币转账 nub_transfer"
 	    echo "9. 导入钱包 import_wallet"
+	    echo "10. 卸载节点 uninstall_node"
 	    echo "0. 退出脚本 exit"
 	    read -p "请输入选项: " OPTION
 	
@@ -100,6 +118,7 @@ function main_menu() {
 	    7) wallet_keys ;;
 	    8) nub_transfer ;;
 	    9) import_wallet ;;
+	    10) uninstall_node ;;
 	    0) echo "退出脚本。"; exit 0 ;;
 	    *) echo "无效选项，请重新输入。"; sleep 3 ;;
 	    esac
