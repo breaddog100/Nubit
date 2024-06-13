@@ -67,7 +67,7 @@ function import_wallet(){
 	network="nubit-alphatestnet-1"
 	node_type="light"
 	cd ~/nubit-node/bin
-	./nkey add $wallet_name --recover --keyring-backend test --node.type $network --p2p.network $node_type
+	./nkey add $wallet_name --recover --keyring-backend test --p2p.network $network --node.type $node_type
 }
 
 # 卸载节点
@@ -94,6 +94,9 @@ function main_menu() {
 	    echo "===================Nubit 一键部署脚本==================="
 		echo "沟通电报群：https://t.me/lumaogogogo"
 		echo "推荐配置：1C1G40G"
+		echo "感谢以下无私的分享者："
+    	echo "XIA 修复转账功能"
+    	echo "===================桃花潭水深千尺，不及汪伦送我情====================="
 		echo "请选择要执行的操作:"
 	    echo "1. 部署节点 install_node"
 	    echo "2. 查看状态 view_status"
