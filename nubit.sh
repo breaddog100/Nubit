@@ -107,7 +107,7 @@ function main_menu() {
 	    echo "7. 获取秘钥 wallet_keys"
 	    echo "8. 代币转账 nub_transfer"
 	    echo "9. 导入钱包 import_wallet"
-	    echo "10. 卸载节点 uninstall_node"
+	    echo "1618. 卸载节点 uninstall_node"
 	    echo "0. 退出脚本 exit"
 	    read -p "请输入选项: " OPTION
 	
@@ -121,7 +121,7 @@ function main_menu() {
 	    7) wallet_keys ;;
 	    8) nub_transfer ;;
 	    9) import_wallet ;;
-	    10) uninstall_node ;;
+	    1618) uninstall_node ;;
 	    0) echo "退出脚本。"; exit 0 ;;
 	    *) echo "无效选项，请重新输入。"; sleep 3 ;;
 	    esac
